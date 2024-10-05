@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <UserSecretsId>aspnet-MyRealEstate.Web-3A8238FB-A9DC-429E-B9C5-50156E6DFEA3</UserSecretsId>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.4" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
+    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.2" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MyRealEstate.DataLayer\MyRealEstate.DataLayer.csproj" />
+    <ProjectReference Include="..\MyRealEstate.DomainClasses\MyRealEstate.DomainClasses.csproj" />
+    <ProjectReference Include="..\MyRealEstate.Services\MyRealEstate.Services.csproj" />
+    <ProjectReference Include="..\MyRealEstate.Utilities\MyRealEstate.Utilities.csproj" />
+    <ProjectReference Include="..\MyRealEstate.ViewModels\MyRealEstate.ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

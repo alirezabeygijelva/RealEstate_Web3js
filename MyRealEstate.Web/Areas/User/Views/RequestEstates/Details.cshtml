@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using MyRealEstate.Web.Models
+@model MyRealEstate.DomainClasses.Estate.RequestEstate
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.SaveUserId)
+        </dt>
+        <dd>
+            @{
+                var user = UserManager.FindByIdAsync(@Model.SaveUserId);
+            }
+            Name: @user.Result.FName <br>
+            Family : @user.Result.LName <br>
+            CellPhone : @user.Result.PhoneNumber
+
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SaveTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SaveTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit"  asp-route-id="@Model.RequestEstateId">Edit</a> |
+    <a asp-action="Index" asp-route-id="@Model.EstateId"> Back To List </a>
+</div>

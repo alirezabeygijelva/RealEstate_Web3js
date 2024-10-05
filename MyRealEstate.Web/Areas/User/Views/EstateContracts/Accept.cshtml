@@ -1,0 +1,106 @@
+﻿@model MyRealEstate.DomainClasses.Estate.EstateContract
+@using Microsoft.AspNetCore.Identity
+@using MyRealEstate.Web.Models;
+@inject UserManager<ApplicationUser> _UserManager
+
+@{
+    ViewData["Title"] = "Accept";
+}
+
+<h2>Confirm Contract</h2>
+
+<h3>Are You Sure For Confirm?</h3>
+<div>
+    <h4>EstateContract</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.OwnerUserId)
+        </dt>
+        <dd>
+            @{
+                var ownerUser = _UserManager.FindByIdAsync(@Model.OwnerUserId).Result;
+            }
+            Name: @ownerUser.FName <br>
+            Family : @ownerUser.LName  <br />
+             CellPhone: @ownerUser.PhoneNumber
+
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BuyerUserId)
+        </dt>
+        <dd>
+            @{
+                var buyerUser = _UserManager.FindByIdAsync(@Model.BuyerUserId).Result;
+            }
+            Name: @buyerUser.FName <br>
+            Family: @buyerUser.LName  <br />
+           CellPhone: @buyerUser.PhoneNumber
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SellerUserId)
+        </dt>
+        <dd>
+            @{
+                var sellerUser = _UserManager.FindByIdAsync(@Model.SellerUserId).Result;
+            }
+            Name: @sellerUser.FName <br>
+            Family : @sellerUser.LName  <br />
+            CellPhone : @sellerUser.PhoneNumber
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BuyerOK)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BuyerOK)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SellerOK)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SellerOK)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BuyerOKTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BuyerOKTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SellerOKTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SellerOKTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SaveTime)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.SaveTime)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Note)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Note)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Estate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Estate.EstateId)
+        </dd>
+    </dl>
+
+    <form asp-action="Accept">
+        <input type="hidden" asp-for="EstateContractId" />
+        <input type="submit" value="Confirm" class="btn btn-success" /> |
+        <a asp-action="Index" asp-route-id="@ViewBag.EstateId">Back To List  </a>
+    </form>
+</div>

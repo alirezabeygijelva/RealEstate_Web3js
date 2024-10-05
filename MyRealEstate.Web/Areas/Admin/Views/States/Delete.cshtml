@@ -1,0 +1,30 @@
+﻿@model MyRealEstate.DomainClasses.Admin.State
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+<h2> Delete State</h2>
+
+<h3>Are You Sure For Delete '@Model.StateName' ?</h3>
+<div>
+  
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.StateName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StateName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="StateId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <div>
+            <a asp-action="Index">Back To List</a>
+        </div>
+    </form>
+</div>

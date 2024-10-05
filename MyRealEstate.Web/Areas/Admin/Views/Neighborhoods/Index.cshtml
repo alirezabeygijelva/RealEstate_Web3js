@@ -1,0 +1,41 @@
+﻿@model IEnumerable<MyRealEstate.DomainClasses.Admin.Neighborhood>
+
+@{
+    ViewData["Title"] = "Neighborhoods";
+}
+
+<h2>Neighborhoods</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NeighborhoodName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NeighborhoodName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City.CityName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.NeighborhoodId" class="btn-warning">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.NeighborhoodId" class="btn-info">Detial</a> |
+                <a asp-action="Delete" asp-route-id="@item.NeighborhoodId" class="btn-danger">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,57 @@
+﻿@using System.Security.Claims
+@model IEnumerable<MyRealEstate.DomainClasses.Estate.RequestEstate>
+
+@{
+    ViewData["Title"] = " ‌Requests";
+}
+
+<h2> ‌Requests</h2>
+
+<p>
+    <a asp-action="Create" asp-route-id=@ViewData["estateId"] >New </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+      
+            <th>
+                @Html.DisplayNameFor(model => model.SaveTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+        
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+          
+            <td>
+                @Html.DisplayFor(modelItem => item.SaveTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+     
+            <td>
+                @{
+                    if (this.User.FindFirstValue(ClaimTypes.NameIdentifier) == item.SaveUserId)
+                    {
+                    <a asp-action="Edit" asp-route-id="@item.RequestEstateId" class="btn btn-warning">Edit</a>
+                    }
+                }
+
+                <a asp-action="Details" asp-route-id="@item.RequestEstateId" class="btn btn-info">Detial</a> |
+                @{
+                    if (this.User.FindFirstValue(ClaimTypes.NameIdentifier) == item.SaveUserId)
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.RequestEstateId" class="btn btn-danger">Delete</a>
+                    }
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

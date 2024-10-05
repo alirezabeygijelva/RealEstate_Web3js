@@ -1,0 +1,90 @@
+﻿@model IEnumerable<MyRealEstate.DomainClasses.Estate.EstateContract>
+@using Microsoft.AspNetCore.Identity
+@using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.View
+@using MyRealEstate.Web.Models;
+@inject UserManager<ApplicationUser> _UserManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Contracts</h2>
+
+<p>
+    @{
+        if (_UserManager.FindByNameAsync(User.Identity.Name).Result.IsConsultant == true)
+        {
+            <a asp-action="Create" asp-route-id="@ViewBag.EstateId">New Contract </a>
+        }
+    }
+
+</p>
+<p>
+      Your Balance: @ViewBag.Balance
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.OwnerUserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuyerUserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SellerUserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SaveTime)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Amount)
+            </th>
+       
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+               @{
+                   var ownerUser = _UserManager.FindByIdAsync(@item.OwnerUserId).Result;
+               }
+               @ownerUser.FName  @ownerUser.LName
+            </td>
+            <td>
+                @{
+                    var buyerUser = _UserManager.FindByIdAsync(@item.BuyerUserId).Result;
+                }
+                @buyerUser.FName  @buyerUser.LName
+            </td>
+            <td>
+                @{
+                    var sellerUser = _UserManager.FindByIdAsync(@item.SellerUserId).Result;
+                }
+                @sellerUser.FName  @sellerUser.LName
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SaveTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Note)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.EstateContractId" class="btn btn-info">Detial</a> |
+                @if ((_UserManager.GetUserId(User) == @item.BuyerUserId && @item.BuyerOK != true) || (_UserManager.GetUserId(User) == @item.SellerUserId && @item.SellerOK != true))
+                {
+                    <a asp-action="Accept" asp-route-id="@item.EstateContractId" class="btn btn-success">Confrim Contract </a>
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

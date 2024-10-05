@@ -1,0 +1,33 @@
+﻿@model MyRealEstate.DomainClasses.Admin.City
+
+@{
+    ViewData["Title"] = "Delete City";
+}
+
+<h2>Delete City</h2>
+
+<h3>Are you sure Want to Delete «@Model.CityName»؟</h3>
+<div>
+    <h4>City</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CityName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CityName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.State)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.State.StateName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CityId" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index">Back To List</a>
+    </form>
+</div>

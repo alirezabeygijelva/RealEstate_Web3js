@@ -1,0 +1,87 @@
+﻿@using Microsoft.AspNetCore.Mvc.Razor.Extensions
+@using MyRealEstate.Utilities.Convertor
+@model IEnumerable<MyRealEstate.DomainClasses.Estate.Estate>
+@using MyRealEstate.Web.Models
+
+
+@{
+    ViewData["Title"] = "Estates ";
+}
+
+<h2> Estates</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Add New  </a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EstateLogo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Area)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RoomNo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ConstructionYear)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RegDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Neighborhood)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                <img src="~/EstateImages/@item.EstateLogo" class="thumbnail" style="max-width:150px">
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RoomNo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ConstructionYear)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @item.RegDate.ToShamsi()
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Neighborhood.NeighborhoodName)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.EstateId" class="btn btn-warning">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.EstateId" class="btn btn-info">Detial</a> |
+                <a asp-action="Delete" asp-route-id="@item.EstateId" class="btn btn-danger">Delete</a>
+                <a asp-area="User" asp-controller="RequestEstates" asp-action="Index" asp-route-id="@item.EstateId" class="btn btn-default">Request To Show </a>
+                <a asp-area="User" asp-controller="EstateContracts" asp-action="Index" asp-route-id="@item.EstateId" class="btn btn-default">Contract</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
